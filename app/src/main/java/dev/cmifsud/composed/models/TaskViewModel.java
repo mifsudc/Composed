@@ -71,6 +71,13 @@ public class TaskViewModel extends AndroidViewModel {
     }
 
     public void insertTask(Task task) {
+        if ( task.getParentId() == null ) {
+
+        }
+        else {
+
+        }
+
         _tasks.put( task.getTaskId(), task);
         _repo.insertTask(task);
     }

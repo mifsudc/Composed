@@ -31,6 +31,13 @@ public class Task implements Parcelable
 
     public Task() {}
 
+    public Task(String name, Integer parentId) {
+        this.name = name;
+        this.parentId = parentId;
+        complete = false;
+        archived = false;
+    }
+
     // Accessors
     public Integer getTaskId() { return taskId; }
     public void setTaskId(int taskId) { this.taskId = taskId; }

@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import dev.cmifsud.composed.R;
 import dev.cmifsud.composed.models.Task;
@@ -47,7 +49,7 @@ public class TaskFragment extends Fragment {
             getActivity().setTitle( _task.getName() );
         }
         else {
-
+            _task = null;
         }
 
         Fragment f = TaskListFragment.newInstance( id );
@@ -59,7 +61,17 @@ public class TaskFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_task, container, false);
+        View v = inflater.inflate(R.layout.fragment_task, container, false);
+
+        v.findViewById(R.id.btn_add_task).setOnClickListener( (View view) -> {
+            EditText taskNameBox = getView().findViewById(R.id.et_new_task_name);
+
+            Integer parentId = _task == null ? null : _task.getTaskId();
+            Task t = new Task(taskNameBox.getText().toString(), parentId);
+            _viewModel.insertTask(t);
+        });
+
+        return v;
     }
 
     @Override
